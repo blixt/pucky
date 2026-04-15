@@ -1,6 +1,6 @@
 name: Pucky
 options:
-  bundleIdPrefix: com.blixt
+  bundleIdPrefix: dev.pucky
   deploymentTarget:
     iOS: "26.0"
   xcodeVersion: "26.4"
@@ -42,14 +42,13 @@ targets:
         product: Gemma4SwiftCore
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.blixt.pucky
+        PRODUCT_BUNDLE_IDENTIFIER: dev.pucky.app
         PRODUCT_NAME: Pucky
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
         INFOPLIST_KEY_CFBundleDisplayName: Pucky
         GENERATE_INFOPLIST_FILE: true
         CODE_SIGN_STYLE: Automatic
-        DEVELOPMENT_TEAM: FHAMPJRKAY
         SWIFT_OBJC_BRIDGING_HEADER: Pucky/Sources/Bridging/Pucky-Bridging-Header.h
         CODE_SIGN_ENTITLEMENTS: Pucky/Pucky.entitlements
     scheme:
@@ -66,7 +65,7 @@ targets:
       - target: Pucky
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.blixt.pucky.tests
+        PRODUCT_BUNDLE_IDENTIFIER: dev.pucky.app.tests
         GENERATE_INFOPLIST_FILE: true
 
   PuckyUITests:
@@ -78,5 +77,5 @@ targets:
       - target: Pucky
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.blixt.pucky.uitests
+        PRODUCT_BUNDLE_IDENTIFIER: dev.pucky.app.uitests
         GENERATE_INFOPLIST_FILE: true

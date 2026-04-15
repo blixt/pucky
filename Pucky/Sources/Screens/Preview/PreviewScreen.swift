@@ -339,7 +339,7 @@ private struct PreviewWebView: UIViewRepresentable {
             return
         }
         store.compileContentRuleList(
-            forIdentifier: "com.blixt.pucky.preview.offline",
+            forIdentifier: "dev.pucky.app.preview.offline",
             encodedContentRuleList: offlineBlockerJSON
         ) { list, error in
             DispatchQueue.main.async {

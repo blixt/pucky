@@ -4,7 +4,7 @@ import os.log
 /// Single source of truth for Pucky's debug instrumentation.
 ///
 /// Every line we log goes through `os_log` under the
-/// `com.blixt.pucky` subsystem with category-specific tags
+/// `dev.pucky.app` subsystem with category-specific tags
 /// (`gen`, `tool`, `orch`, `mem`, …) so an external `idevicesyslog`
 /// watcher can subscribe to exactly the streams it needs without
 /// drowning in UIKit chatter.
@@ -22,10 +22,10 @@ import os.log
 /// We deliberately use `.notice` level so the lines survive past the
 /// system log's default debug filter.
 enum PuckyLog {
-    static let gen = Logger(subsystem: "com.blixt.pucky", category: "gen")
-    static let tool = Logger(subsystem: "com.blixt.pucky", category: "tool")
-    static let orch = Logger(subsystem: "com.blixt.pucky", category: "orch")
-    static let chat = Logger(subsystem: "com.blixt.pucky", category: "chat")
+    static let gen = Logger(subsystem: "dev.pucky.app", category: "gen")
+    static let tool = Logger(subsystem: "dev.pucky.app", category: "tool")
+    static let orch = Logger(subsystem: "dev.pucky.app", category: "orch")
+    static let chat = Logger(subsystem: "dev.pucky.app", category: "chat")
 
     /// Truncate long strings for log lines so a 4 KB TSX file doesn't
     /// blow out the log buffer. The first 120 chars usually contain

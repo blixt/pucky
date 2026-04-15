@@ -366,7 +366,6 @@
 						TestTargetID = D318CD790689751E2F53FE86;
 					};
 					D318CD790689751E2F53FE86 = {
-						DevelopmentTeam = FHAMPJRKAY;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -489,7 +488,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.blixt.pucky.tests;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.pucky.app.tests;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Pucky.app/Pucky";
@@ -573,7 +572,6 @@
 				CODE_SIGN_ENTITLEMENTS = Pucky/Pucky.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = FHAMPJRKAY;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"rust/oxc-bridge\"",
@@ -584,7 +582,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.blixt.pucky;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.pucky.app;
 				PRODUCT_NAME = Pucky;
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "Pucky/Sources/Bridging/Pucky-Bridging-Header.h";
@@ -602,7 +600,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.blixt.pucky.uitests;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.pucky.app.uitests;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = Pucky;
@@ -619,7 +617,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.blixt.pucky.uitests;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.pucky.app.uitests;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = Pucky;
@@ -696,7 +694,6 @@
 				CODE_SIGN_ENTITLEMENTS = Pucky/Pucky.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = FHAMPJRKAY;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"rust/oxc-bridge\"",
@@ -707,7 +704,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.blixt.pucky;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.pucky.app;
 				PRODUCT_NAME = Pucky;
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "Pucky/Sources/Bridging/Pucky-Bridging-Header.h";
@@ -725,7 +722,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.blixt.pucky.tests;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.pucky.app.tests;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Pucky.app/Pucky";

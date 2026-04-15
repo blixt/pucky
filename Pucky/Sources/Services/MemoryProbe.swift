@@ -21,7 +21,7 @@ import os.log
 ///
 /// Numbers are reported in MB (rounded down) so the lines stay grep-friendly.
 enum MemoryProbe {
-    private static let log = Logger(subsystem: "com.blixt.pucky", category: "mem")
+    private static let log = Logger(subsystem: "dev.pucky.app", category: "mem")
 
     static func snapshot(_ label: String) {
         let rss = Self.taskRSS() / (1024 * 1024)

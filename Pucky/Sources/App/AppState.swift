@@ -57,9 +57,31 @@ final class AppState {
         )
     }
 
+    /// Unit-test bundles on iOS launch the app as an XCTest host even
+    /// when the tests never touch the model. Letting the normal app boot
+    /// proceed there loads MLX on-device, and XCTest then tears the host
+    /// process down under it, which trips MLX's thread-pool shutdown path.
+    ///
+    /// UI tests are different: they explicitly pass `--pucky-ui-test` and
+    /// still need the app to initialize its scaffold/chrome.
+    nonisolated static func shouldBootFullApp(
+        arguments: [String] = ProcessInfo.processInfo.arguments,
+        environment: [String: String] = ProcessInfo.processInfo.environment
+    ) -> Bool {
+        let isXCTestHost = environment["XCTestConfigurationFilePath"] != nil
+            || environment["XCTestSessionIdentifier"] != nil
+        let isExplicitUITestLaunch = arguments.contains("--pucky-ui-test")
+        return !isXCTestHost || isExplicitUITestLaunch
+    }
+
     func initialize() async {
         loadError = nil
         projectService.createDefaultProject(template: projectTemplate)
+
+        if !Self.shouldBootFullApp() {
+            isModelLoaded = true
+            return
+        }
 
         // Compile + bundle the default scaffold immediately so the
         // Preview tab is functional the moment the user opens the

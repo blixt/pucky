@@ -1,4 +1,5 @@
 import Foundation
+import Tokenizers
 #if !targetEnvironment(simulator)
 import Gemma4SwiftCore
 import MLX
@@ -329,35 +330,48 @@ final class ModelService {
     #endif
 }
 
-#if !targetEnvironment(simulator)
-import Tokenizers
-
 /// Streaming detokenizer that mirrors `NaiveStreamingDetokenizer`'s
 /// reset-on-newline strategy (so the per-step `tokenizer.decode` call
 /// only ever sees a short window of recent tokens — bounded memory,
 /// no `vm-compressor-thrashing` Jetsam kills) but does its diff in
-/// UTF-8 bytes instead of grapheme clusters (so SentencePiece tokens
-/// whose first character grapheme-merges with the previous token's
-/// last character don't lose their leading byte — fixes the
-/// `import React from 'eact'` bug from `NaiveStreamingDetokenizer`).
+/// UTF-8 bytes instead of grapheme clusters.
+///
+/// The byte-level diff is the important bit: Gemma's tokenizer can
+/// emit tokens whose decoded text changes character boundaries when a
+/// following token arrives. `NaiveStreamingDetokenizer` diffs by
+/// `String.count`, which is based on extended grapheme clusters; that
+/// can swallow the leading bytes of the next token after a segment
+/// reset, producing corrupt text like `from 'eact'`.
 ///
 /// Memory bound: at most ~one line of tokens in `segmentTokens` at
 /// any time. After every newline (or after `segmentResetThreshold`
-/// tokens, whichever comes first) the segment resets to a single
-/// token, so peak transient allocation per step is O(line length),
-/// not O(generated length).
+/// tokens, whichever comes first) the segment resets to a short
+/// contextual tail, so peak transient allocation per step is
+/// O(line length), not O(generated length).
 struct BoundedByteDetokenizer {
     private let tokenizer: Tokenizer
     private var segmentTokens: [Int] = []
-    private var segmentBytes: Int = 0
+    private var emittedPrefixBytes: [UInt8] = []
+    private var emissionChunks: [[UInt8]] = []
 
     /// Hard cap on segment length even if no newline appears. SentencePiece
     /// tokens are typically 1–4 characters, so 32 keeps the per-step decode
     /// to ~64–128 chars, well clear of compressor pressure.
-    private let segmentResetThreshold = 32
+    private let segmentResetThreshold: Int
 
-    init(tokenizer: Tokenizer) {
+    /// Keep a small contextual tail when re-anchoring. The important part
+    /// is that we preserve the tail's *contextual* decoded bytes from the
+    /// full segment, not `decode(tail)` in isolation.
+    private let carryTokenCount: Int
+
+    init(
+        tokenizer: Tokenizer,
+        segmentResetThreshold: Int = 32,
+        carryTokenCount: Int = 4
+    ) {
         self.tokenizer = tokenizer
+        self.segmentResetThreshold = max(1, segmentResetThreshold)
+        self.carryTokenCount = max(1, carryTokenCount)
     }
 
     /// Append a token and return the new text bytes that should be
@@ -370,27 +384,45 @@ struct BoundedByteDetokenizer {
         // Hold back if the new bytes don't form a complete unicode
         // scalar yet — the next token will complete the rune.
         if decoded.unicodeScalars.last == "\u{fffd}" {
+            emissionChunks.append([])
             return nil
         }
 
-        let utf8Count = decoded.utf8.count
-        guard utf8Count > segmentBytes else { return nil }
+        let decodedBytes = Array(decoded.utf8)
+        guard decodedBytes.count >= emittedPrefixBytes.count else {
+            emissionChunks.append([])
+            return nil
+        }
+        guard decodedBytes.starts(with: emittedPrefixBytes) else {
+            // If the tokenizer revises bytes we already emitted, don't
+            // guess. Keep buffering until the next reset point settles it.
+            emissionChunks.append([])
+            return nil
+        }
 
-        let newBytes = Array(decoded.utf8.suffix(utf8Count - segmentBytes))
+        let newBytes = Array(decodedBytes.dropFirst(emittedPrefixBytes.count))
         let result = String(bytes: newBytes, encoding: .utf8)
-        segmentBytes = utf8Count
+        emittedPrefixBytes = decodedBytes
+        emissionChunks.append(newBytes)
 
         // Reset on a line boundary, or when the segment has grown long
         // enough that the per-step decode would start to dominate.
         if decoded.hasSuffix("\n") || segmentTokens.count >= segmentResetThreshold {
-            // Re-anchor: keep just the last token so the next decode
-            // starts from a one-token segment, but seed `segmentBytes`
-            // with that one token's UTF-8 length so we don't re-emit it.
-            segmentTokens = [token]
-            segmentBytes = tokenizer.decode(tokens: segmentTokens).utf8.count
+            reanchor()
         }
 
         return result
     }
+
+    /// Re-anchor on a short suffix, but preserve the suffix bytes exactly
+    /// as they appeared in the full contextual decode. Re-decoding the kept
+    /// suffix in isolation is what caused `from 'react'` to stream as
+    /// `from 'eact'`: the isolated suffix decode can include extra leading
+    /// bytes that were never actually emitted.
+    private mutating func reanchor() {
+        let keptCount = min(segmentTokens.count, carryTokenCount)
+        segmentTokens = Array(segmentTokens.suffix(keptCount))
+        emissionChunks = Array(emissionChunks.suffix(keptCount))
+        emittedPrefixBytes = emissionChunks.flatMap { $0 }
+    }
 }
-#endif

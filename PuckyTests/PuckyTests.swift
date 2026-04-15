@@ -1,5 +1,6 @@
 import Foundation
 import Testing
+import Tokenizers
 @testable import Pucky
 
 @Suite("ChatMessage items")
@@ -189,6 +190,33 @@ struct ChatHistoryRendererTests {
     }
 }
 
+@Suite("App launch gating")
+struct AppLaunchGatingTests {
+    @Test func unitTestHostSkipsFullBoot() {
+        let shouldBoot = AppState.shouldBootFullApp(
+            arguments: ["Pucky"],
+            environment: ["XCTestConfigurationFilePath": "/tmp/test.xctestconfiguration"]
+        )
+        #expect(!shouldBoot)
+    }
+
+    @Test func uiTestLaunchStillBootsApp() {
+        let shouldBoot = AppState.shouldBootFullApp(
+            arguments: ["Pucky", "--pucky-ui-test"],
+            environment: ["XCTestConfigurationFilePath": "/tmp/test.xctestconfiguration"]
+        )
+        #expect(shouldBoot)
+    }
+
+    @Test func normalLaunchBootsApp() {
+        let shouldBoot = AppState.shouldBootFullApp(
+            arguments: ["Pucky"],
+            environment: [:]
+        )
+        #expect(shouldBoot)
+    }
+}
+
 
 @Suite("Single-code tool surface")
 @MainActor
@@ -289,5 +317,467 @@ struct SingleCodeToolTests {
             #expect(project.editableFiles.count == 1)
             #expect(project.editableFiles.first?.path == template.editablePath)
         }
+    }
+}
+
+@Suite("Streaming detokenizer regressions")
+struct StreamingDetokenizerTests {
+    /// Minimal copy of MLXLMCommon's upstream detokenizer. We keep it
+    /// local to the test so the regression stays pinned even if the
+    /// package updates underneath us.
+    struct NaiveCharacterDetokenizer {
+        let tokenizer: Tokenizer
+        var segmentTokens: [Int] = []
+        var segment = ""
+
+        mutating func append(token: Int) {
+            segmentTokens.append(token)
+        }
+
+        mutating func startNewSegment() {
+            let lastToken = segmentTokens.last
+            segmentTokens.removeAll()
+            if let lastToken {
+                segmentTokens.append(lastToken)
+                segment = tokenizer.decode(tokens: segmentTokens)
+            } else {
+                segment = ""
+            }
+        }
+
+        mutating func next() -> String? {
+            let newSegment = tokenizer.decode(tokens: segmentTokens)
+            let new = newSegment.suffix(newSegment.count - segment.count)
+            if new.last == "\u{fffd}" {
+                return nil
+            }
+            if new.hasSuffix("\n") {
+                startNewSegment()
+            } else {
+                segment = newSegment
+            }
+            return String(new)
+        }
+    }
+
+    /// Copy of the previous production re-anchor logic. This is the
+    /// regression we care about for Pucky itself: after a threshold
+    /// reset, it re-decoded the carried token(s) in isolation and
+    /// treated those bytes as already emitted.
+    struct ThresholdResetByteCountDetokenizer {
+        let tokenizer: Tokenizer
+        let segmentResetThreshold: Int
+        var segmentTokens: [Int] = []
+        var segmentBytes: Int = 0
+
+        init(tokenizer: Tokenizer, segmentResetThreshold: Int) {
+            self.tokenizer = tokenizer
+            self.segmentResetThreshold = segmentResetThreshold
+        }
+
+        mutating func append(token: Int) -> String? {
+            segmentTokens.append(token)
+            let decoded = tokenizer.decode(tokens: segmentTokens)
+            if decoded.unicodeScalars.last == "\u{fffd}" {
+                return nil
+            }
+
+            let utf8Count = decoded.utf8.count
+            guard utf8Count > segmentBytes else { return nil }
+
+            let newBytes = Array(decoded.utf8.suffix(utf8Count - segmentBytes))
+            let result = String(bytes: newBytes, encoding: .utf8)
+            segmentBytes = utf8Count
+
+            if decoded.hasSuffix("\n") || segmentTokens.count >= segmentResetThreshold {
+                let lastToken = token
+                segmentTokens = [lastToken]
+                segmentBytes = tokenizer.decode(tokens: segmentTokens).utf8.count
+            }
+
+            return result
+        }
+    }
+
+    /// Synthetic tokenizer with a grapheme split across tokens. The
+    /// one-shot decode is stable and well-formed, so we can compare
+    /// streaming output against the final decode exactly.
+    struct GraphemeSplitTokenizer: Tokenizer {
+        func tokenize(text: String) -> [String] { [] }
+        func encode(text: String) -> [Int] { [] }
+        func encode(text: String, addSpecialTokens: Bool) -> [Int] { [] }
+
+        func decode(tokens: [Int], skipSpecialTokens: Bool) -> String {
+            switch tokens {
+            case [0]:
+                return "import React from '👩‍"
+            case [0, 1]:
+                return "import React from '👩‍💻react"
+            default:
+                Issue.record("unexpected token sequence: \(tokens)")
+                return ""
+            }
+        }
+
+        func convertTokenToId(_ token: String) -> Int? { nil }
+        func convertIdToToken(_ id: Int) -> String? { nil }
+
+        var bosToken: String? = nil
+        var bosTokenId: Int? = nil
+        var eosToken: String? = nil
+        var eosTokenId: Int? = nil
+        var unknownToken: String? = nil
+        var unknownTokenId: Int? = nil
+
+        func applyChatTemplate(messages: [Tokenizers.Message]) throws -> [Int] { [] }
+
+        func applyChatTemplate(messages: [Tokenizers.Message], tools: [Tokenizers.ToolSpec]?) throws
+            -> [Int]
+        {
+            []
+        }
+
+        func applyChatTemplate(
+            messages: [Tokenizers.Message],
+            tools: [Tokenizers.ToolSpec]?,
+            additionalContext: [String: any Sendable]?
+        ) throws -> [Int] {
+            []
+        }
+
+        func applyChatTemplate(
+            messages: [Tokenizers.Message],
+            chatTemplate: Tokenizers.ChatTemplateArgument
+        ) throws -> [Int] {
+            []
+        }
+
+        func applyChatTemplate(messages: [Tokenizers.Message], chatTemplate: String) throws -> [Int] {
+            []
+        }
+
+        func applyChatTemplate(
+            messages: [Tokenizers.Message],
+            chatTemplate: Tokenizers.ChatTemplateArgument?,
+            addGenerationPrompt: Bool,
+            truncation: Bool,
+            maxLength: Int?,
+            tools: [Tokenizers.ToolSpec]?
+        ) throws -> [Int] {
+            []
+        }
+
+        func applyChatTemplate(
+            messages: [Tokenizers.Message],
+            chatTemplate: Tokenizers.ChatTemplateArgument?,
+            addGenerationPrompt: Bool,
+            truncation: Bool,
+            maxLength: Int?,
+            tools: [Tokenizers.ToolSpec]?,
+            additionalContext: [String: any Sendable]?
+        ) throws -> [Int] {
+            []
+        }
+    }
+
+    /// Synthetic tokenizer that reproduces the reset-path corruption:
+    /// token `1` contributes only a newline in context, but once the
+    /// detokenizer re-anchors on `[1]` it decodes to `\n👩‍`. When token
+    /// `2` arrives, the upstream character-count diff drops the `💻`
+    /// entirely, while the byte-count diff emits `💻react`.
+    struct ResetBoundaryMergingTokenizer: Tokenizer {
+        func tokenize(text: String) -> [String] { [] }
+        func encode(text: String) -> [Int] { [] }
+        func encode(text: String, addSpecialTokens: Bool) -> [Int] { [] }
+
+        func decode(tokens: [Int], skipSpecialTokens: Bool) -> String {
+            switch tokens {
+            case [0]:
+                return "import React from '"
+            case [0, 1]:
+                return "import React from '\n"
+            case [1]:
+                return "\n👩‍"
+            case [1, 2]:
+                return "\n👩‍💻react"
+            case [0, 1, 2]:
+                return "import React from '\n👩‍💻react"
+            default:
+                Issue.record("unexpected token sequence: \(tokens)")
+                return ""
+            }
+        }
+
+        func convertTokenToId(_ token: String) -> Int? { nil }
+        func convertIdToToken(_ id: Int) -> String? { nil }
+
+        var bosToken: String? = nil
+        var bosTokenId: Int? = nil
+        var eosToken: String? = nil
+        var eosTokenId: Int? = nil
+        var unknownToken: String? = nil
+        var unknownTokenId: Int? = nil
+
+        func applyChatTemplate(messages: [Tokenizers.Message]) throws -> [Int] { [] }
+
+        func applyChatTemplate(messages: [Tokenizers.Message], tools: [Tokenizers.ToolSpec]?) throws
+            -> [Int]
+        {
+            []
+        }
+
+        func applyChatTemplate(
+            messages: [Tokenizers.Message],
+            tools: [Tokenizers.ToolSpec]?,
+            additionalContext: [String: any Sendable]?
+        ) throws -> [Int] {
+            []
+        }
+
+        func applyChatTemplate(
+            messages: [Tokenizers.Message],
+            chatTemplate: Tokenizers.ChatTemplateArgument
+        ) throws -> [Int] {
+            []
+        }
+
+        func applyChatTemplate(messages: [Tokenizers.Message], chatTemplate: String) throws -> [Int] {
+            []
+        }
+
+        func applyChatTemplate(
+            messages: [Tokenizers.Message],
+            chatTemplate: Tokenizers.ChatTemplateArgument?,
+            addGenerationPrompt: Bool,
+            truncation: Bool,
+            maxLength: Int?,
+            tools: [Tokenizers.ToolSpec]?
+        ) throws -> [Int] {
+            []
+        }
+
+        func applyChatTemplate(
+            messages: [Tokenizers.Message],
+            chatTemplate: Tokenizers.ChatTemplateArgument?,
+            addGenerationPrompt: Bool,
+            truncation: Bool,
+            maxLength: Int?,
+            tools: [Tokenizers.ToolSpec]?,
+            additionalContext: [String: any Sendable]?
+        ) throws -> [Int] {
+            []
+        }
+    }
+
+    /// Minimal reproduction of the observed `from 'eact'` failure mode:
+    /// the carried suffix token decodes to `"'r"` in isolation, but only
+    /// to `"'"` in context. Re-anchoring from the isolated decode makes the
+    /// next step think the `r` was already emitted.
+    struct ReactThresholdResetTokenizer: Tokenizer {
+        func tokenize(text: String) -> [String] { [] }
+        func encode(text: String) -> [Int] { [] }
+        func encode(text: String, addSpecialTokens: Bool) -> [Int] { [] }
+
+        func decode(tokens: [Int], skipSpecialTokens: Bool) -> String {
+            switch tokens {
+            case [0]:
+                return "from "
+            case [0, 1]:
+                return "from '"
+            case [1]:
+                return "'r"
+            case [1, 2]:
+                return "'react"
+            case [2]:
+                return "react"
+            case [2, 3]:
+                return "react';"
+            case [3]:
+                return "';"
+            case [1, 2, 3]:
+                return "'react';"
+            case [0, 1, 2]:
+                return "from 'react"
+            case [0, 1, 2, 3]:
+                return "from 'react';"
+            default:
+                Issue.record("unexpected token sequence: \(tokens)")
+                return ""
+            }
+        }
+
+        func convertTokenToId(_ token: String) -> Int? { nil }
+        func convertIdToToken(_ id: Int) -> String? { nil }
+
+        var bosToken: String? = nil
+        var bosTokenId: Int? = nil
+        var eosToken: String? = nil
+        var eosTokenId: Int? = nil
+        var unknownToken: String? = nil
+        var unknownTokenId: Int? = nil
+
+        func applyChatTemplate(messages: [Tokenizers.Message]) throws -> [Int] { [] }
+
+        func applyChatTemplate(messages: [Tokenizers.Message], tools: [Tokenizers.ToolSpec]?) throws
+            -> [Int]
+        {
+            []
+        }
+
+        func applyChatTemplate(
+            messages: [Tokenizers.Message],
+            tools: [Tokenizers.ToolSpec]?,
+            additionalContext: [String: any Sendable]?
+        ) throws -> [Int] {
+            []
+        }
+
+        func applyChatTemplate(
+            messages: [Tokenizers.Message],
+            chatTemplate: Tokenizers.ChatTemplateArgument
+        ) throws -> [Int] {
+            []
+        }
+
+        func applyChatTemplate(messages: [Tokenizers.Message], chatTemplate: String) throws -> [Int] {
+            []
+        }
+
+        func applyChatTemplate(
+            messages: [Tokenizers.Message],
+            chatTemplate: Tokenizers.ChatTemplateArgument?,
+            addGenerationPrompt: Bool,
+            truncation: Bool,
+            maxLength: Int?,
+            tools: [Tokenizers.ToolSpec]?
+        ) throws -> [Int] {
+            []
+        }
+
+        func applyChatTemplate(
+            messages: [Tokenizers.Message],
+            chatTemplate: Tokenizers.ChatTemplateArgument?,
+            addGenerationPrompt: Bool,
+            truncation: Bool,
+            maxLength: Int?,
+            tools: [Tokenizers.ToolSpec]?,
+            additionalContext: [String: any Sendable]?
+        ) throws -> [Int] {
+            []
+        }
+    }
+
+    private func collectNaiveStream(_ tokens: [Int], tokenizer: Tokenizer) -> String {
+        var detokenizer = NaiveCharacterDetokenizer(tokenizer: tokenizer)
+        var out = ""
+        for token in tokens {
+            detokenizer.append(token: token)
+            out += detokenizer.next() ?? ""
+        }
+        return out
+    }
+
+    private func collectByteStream(
+        _ tokens: [Int],
+        tokenizer: Tokenizer,
+        segmentResetThreshold: Int = 32,
+        carryTokenCount: Int = 4
+    ) -> String {
+        var detokenizer = BoundedByteDetokenizer(
+            tokenizer: tokenizer,
+            segmentResetThreshold: segmentResetThreshold,
+            carryTokenCount: carryTokenCount
+        )
+        var out = ""
+        for token in tokens {
+            out += detokenizer.append(token: token) ?? ""
+        }
+        return out
+    }
+
+    private func collectOldByteCountStream(
+        _ tokens: [Int],
+        tokenizer: Tokenizer,
+        segmentResetThreshold: Int
+    ) -> String {
+        var detokenizer = ThresholdResetByteCountDetokenizer(
+            tokenizer: tokenizer,
+            segmentResetThreshold: segmentResetThreshold
+        )
+        var out = ""
+        for token in tokens {
+            out += detokenizer.append(token: token) ?? ""
+        }
+        return out
+    }
+
+    @Test func upstreamCharacterDiffDropsBoundarySpanningContentAfterReset() {
+        let tokenizer = ResetBoundaryMergingTokenizer()
+        let tokens = [0, 1, 2]
+
+        let streamed = collectNaiveStream(tokens, tokenizer: tokenizer)
+
+        #expect(streamed == "import React from '\nreact")
+    }
+
+    @Test func boundedByteDetokenizerPreservesBoundarySpanningContentAcrossTokens() {
+        let tokenizer = GraphemeSplitTokenizer()
+        let tokens = [0, 1]
+
+        let naive = collectNaiveStream(tokens, tokenizer: tokenizer)
+        let byteStream = collectByteStream(tokens, tokenizer: tokenizer)
+
+        #expect(naive == "import React from '👩‍react")
+        #expect(byteStream == tokenizer.decode(tokens: tokens))
+        #expect(byteStream == "import React from '👩‍💻react")
+    }
+
+    @Test func boundedByteDetokenizerKeepsResetBoundaryContinuation() {
+        let tokenizer = ResetBoundaryMergingTokenizer()
+        let tokens = [0, 1, 2]
+
+        let streamed = collectByteStream(tokens, tokenizer: tokenizer)
+
+        #expect(streamed == "import React from '\n👩‍💻react")
+    }
+
+    @Test func oldThresholdReanchorDropsLeadingCharacterFromReact() {
+        let tokenizer = ReactThresholdResetTokenizer()
+        let tokens = [0, 1, 2, 3]
+
+        let streamed = collectOldByteCountStream(
+            tokens,
+            tokenizer: tokenizer,
+            segmentResetThreshold: 2
+        )
+
+        #expect(streamed == "from 'eact';")
+    }
+
+    @Test func boundedByteDetokenizerPreservesReactAcrossThresholdReset() {
+        let tokenizer = ReactThresholdResetTokenizer()
+        let tokens = [0, 1, 2, 3]
+
+        let streamed = collectByteStream(
+            tokens,
+            tokenizer: tokenizer,
+            segmentResetThreshold: 2,
+            carryTokenCount: 1
+        )
+
+        #expect(streamed == "from 'react';")
+    }
+
+    /// Opt-in network test. The observed `from 'eact'` output does not
+    /// require Gemma to sample the single `react` token; the real Hugging
+    /// Face tokenizer also accepts an alternate `r` + `ea` + `ct` path.
+    @Test func realGemmaTokenizerSupportsSplitReactPieces() async throws {
+        guard ProcessInfo.processInfo.environment["PUCKY_GEMMA_NETWORK_TEST"] == "1" else { return }
+
+        let tokenizer = try await AutoTokenizer.from(pretrained: "mlx-community/gemma-4-e2b-it-4bit")
+
+        #expect(tokenizer.decode(tokens: [5966]) == "react")
+        #expect(tokenizer.decode(tokens: [236750, 15919, 539]) == "react")
+        #expect(tokenizer.decode(tokens: [699, 756, 236750, 15919, 539, 2134]) == " from 'react';")
     }
 }
