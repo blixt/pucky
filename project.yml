@@ -1,0 +1,82 @@
+name: Pucky
+options:
+  bundleIdPrefix: com.blixt
+  deploymentTarget:
+    iOS: "26.0"
+  xcodeVersion: "26.4"
+  createIntermediateGroups: true
+  defaultConfig: Debug
+
+settings:
+  base:
+    TARGETED_DEVICE_FAMILY: "1"
+    SWIFT_VERSION: "6.2"
+    IPHONEOS_DEPLOYMENT_TARGET: "26.0"
+    SUPPORTS_MACCATALYST: false
+    SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD: false
+    INFOPLIST_KEY_UILaunchScreen_Generation: true
+    INFOPLIST_KEY_UISupportedInterfaceOrientations: "UIInterfaceOrientationPortrait"
+    INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad: ""
+
+packages:
+  Gemma4SwiftCore:
+    url: https://github.com/yejingyang8963-byte/Swift-gemma4-core
+    revision: a98eff8077372f9664454b879084b7c75dc756e3
+
+targets:
+  Pucky:
+    type: application
+    platform: iOS
+    sources:
+      - path: Pucky/Sources
+        excludes:
+          - "Bridging/*"
+      - path: Pucky/Assets.xcassets
+        buildPhase: resources
+      - path: Pucky/Runtime
+        buildPhase: resources
+    dependencies:
+      - framework: rust/oxc-bridge/OxcBridge.xcframework
+        embed: false
+      - package: Gemma4SwiftCore
+        product: Gemma4SwiftCore
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.blixt.pucky
+        PRODUCT_NAME: Pucky
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        INFOPLIST_KEY_CFBundleDisplayName: Pucky
+        GENERATE_INFOPLIST_FILE: true
+        CODE_SIGN_STYLE: Automatic
+        DEVELOPMENT_TEAM: FHAMPJRKAY
+        SWIFT_OBJC_BRIDGING_HEADER: Pucky/Sources/Bridging/Pucky-Bridging-Header.h
+        CODE_SIGN_ENTITLEMENTS: Pucky/Pucky.entitlements
+    scheme:
+      testTargets:
+        - PuckyTests
+        - PuckyUITests
+
+  PuckyTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: PuckyTests
+    dependencies:
+      - target: Pucky
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.blixt.pucky.tests
+        GENERATE_INFOPLIST_FILE: true
+
+  PuckyUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - path: PuckyUITests
+    dependencies:
+      - target: Pucky
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.blixt.pucky.uitests
+        GENERATE_INFOPLIST_FILE: true

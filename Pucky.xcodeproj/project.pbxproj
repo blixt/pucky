@@ -1,0 +1,796 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		01199D2D1C3364613823CD88 /* OxcBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0356B8CC2C19D161C7B654A1 /* OxcBridge.swift */; };
+		01C3900673872BCBF895AFD3 /* PreviewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729ED02647CC761F58A4ECC9 /* PreviewService.swift */; };
+		01C4D894A2C7EF66A9AE7172 /* DesignSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7181B4D881F434E69A47B227 /* DesignSystem.swift */; };
+		042D870FA87BE2A736F8B25A /* ProjectService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6A08746FE2AEC8FA2E25D8 /* ProjectService.swift */; };
+		15BA5A4DF95344BFAEB1CC4B /* SyntaxHighlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C580ADED23E9546C7F2F493 /* SyntaxHighlighter.swift */; };
+		1D26666C4D5D687B78F9DDCF /* PuckyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8446E951E69CE785A1187BFB /* PuckyTests.swift */; };
+		1E4E4559BC77608739D82D1B /* Gemma4SwiftCore in Frameworks */ = {isa = PBXBuildFile; productRef = 8DB7F35B376C104526FE54AF /* Gemma4SwiftCore */; };
+		1E5D62688B9168CBFF37301D /* CodeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334B0DCE51BEED37B147E874 /* CodeScreen.swift */; };
+		1EC1C231B510FB35886D9D40 /* PreviewRuntime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3240CA5A0FFE2B496C6ED3A1 /* PreviewRuntime.swift */; };
+		276EC74B66183E4845365F2B /* FilePatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198CE24212B4108DFB39FFBD /* FilePatch.swift */; };
+		32A0E8D7A097275F7168A521 /* PuckyLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2DA6FBC75F9E4918CF2346 /* PuckyLog.swift */; };
+		4006CEB5DA928892DD839245 /* MainNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E7DDC15870B97AA123C0DF /* MainNavigationView.swift */; };
+		479812B2E39948CCC8B73EA4 /* Gemma4Variant.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E3A53E99DAB1A51716173F /* Gemma4Variant.swift */; };
+		4CF37E64D543946E40A52564 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 298F0E8DDBB68E1488CE30EC /* Assets.xcassets */; };
+		5DD20BCCD2270E18B8779F98 /* LogEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2A541E6E988607F105046B /* LogEntry.swift */; };
+		5FCF136EE00AD6D7EC00FBA8 /* PuckyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9551B5D7D5C469B79655225E /* PuckyUITests.swift */; };
+		671318D456885EEFCC6C3E3B /* ProjectTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01626F0FCB7A7CB66D8762B7 /* ProjectTemplate.swift */; };
+		71D850AA51312F5BF53D88C2 /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4322623B2AC49A8E058BD234 /* ChatMessage.swift */; };
+		775F2D223B9FCFF314910DCE /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592345A91E7C9FA86935FC85 /* AppState.swift */; };
+		7D320469D6CD00C5EFBAC4AF /* ChatBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8BECB3C55A67578831FA26 /* ChatBubble.swift */; };
+		858D42170819D17AED44B7D5 /* IslandRope.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91DB623653EE9A59F3CCCB97 /* IslandRope.swift */; };
+		88D18430D12C7EECD301A656 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D7388201FA32DA0E4E318B /* OnboardingView.swift */; };
+		8927BF66F273BC914F9CA527 /* OrchestrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9738C647BFBAA72D3E3F0BCC /* OrchestrationService.swift */; };
+		8D64DB92E48CC53250301BE9 /* ProjectScaffold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A0F90F95D0D0803D924E15 /* ProjectScaffold.swift */; };
+		A883D473017A917297D87FF5 /* three.module.min.js in Resources */ = {isa = PBXBuildFile; fileRef = B7CC4C101CD498381C63D6A0 /* three.module.min.js */; };
+		A9FC1664AA174F3B9EE74C52 /* ChatScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6DCA11B30DD8D5814B29DF /* ChatScreen.swift */; };
+		B02891DA16EB82586F8B69A3 /* Gemma4Runtime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A72E99FA56C224E931805AA /* Gemma4Runtime.swift */; };
+		B2782AB2ADF30B3AFDDEC466 /* BuildError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D64DE0D3FABC852D0DC93C8 /* BuildError.swift */; };
+		BAD2DE765FEBC7E9387EF9B0 /* OxcBridge.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1E26ECEB83B94910F78DAC4 /* OxcBridge.xcframework */; };
+		C58E3C1AFD4AF491974AD808 /* PreviewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F3A0892EABD5B51B3D8C40 /* PreviewScreen.swift */; };
+		C8D45104F68F48A30EFB9B37 /* ProjectFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DF2D909489F952401236912 /* ProjectFile.swift */; };
+		D7A0929344276F1D823915B6 /* ModelService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5947DDCDE2C42311D70438D6 /* ModelService.swift */; };
+		DEC55F9E7F890B1065A5E34E /* ChatHistoryRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30AEA6CC626A46612B76434 /* ChatHistoryRenderer.swift */; };
+		E2FB02D9BCD0A33C8C024D72 /* DynamicIsland.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8765AAC92101672099AF49 /* DynamicIsland.swift */; };
+		E63806EDB65AF56452ADDAF8 /* MemoryProbe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359B71FE1F8878E94AB7BC51 /* MemoryProbe.swift */; };
+		F1B4FB18A3C23FC590FE5095 /* TransformService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5565C85BF629E34648E1356B /* TransformService.swift */; };
+		F1CD237CF97FC36460C61832 /* Gemma4Tooling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB66FB5B9842BD6212C1F93 /* Gemma4Tooling.swift */; };
+		FAB35FE072FE4F3F2C214643 /* PuckyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961D304A5E5238893FFCB052 /* PuckyApp.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		48C1BCD54AF655329AAEE7F3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 168DEE1070BC1E00BE8A541E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D318CD790689751E2F53FE86;
+			remoteInfo = Pucky;
+		};
+		F5CCEA9A18980522268C07E2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 168DEE1070BC1E00BE8A541E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D318CD790689751E2F53FE86;
+			remoteInfo = Pucky;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		01626F0FCB7A7CB66D8762B7 /* ProjectTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTemplate.swift; sourceTree = "<group>"; };
+		01E7DDC15870B97AA123C0DF /* MainNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationView.swift; sourceTree = "<group>"; };
+		0356B8CC2C19D161C7B654A1 /* OxcBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OxcBridge.swift; sourceTree = "<group>"; };
+		0B8BECB3C55A67578831FA26 /* ChatBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBubble.swift; sourceTree = "<group>"; };
+		198CE24212B4108DFB39FFBD /* FilePatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilePatch.swift; sourceTree = "<group>"; };
+		298F0E8DDBB68E1488CE30EC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2D2DA6FBC75F9E4918CF2346 /* PuckyLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuckyLog.swift; sourceTree = "<group>"; };
+		3240CA5A0FFE2B496C6ED3A1 /* PreviewRuntime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewRuntime.swift; sourceTree = "<group>"; };
+		334B0DCE51BEED37B147E874 /* CodeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeScreen.swift; sourceTree = "<group>"; };
+		359B71FE1F8878E94AB7BC51 /* MemoryProbe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryProbe.swift; sourceTree = "<group>"; };
+		4322623B2AC49A8E058BD234 /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
+		4EC4BA2D292AB50D44BEDF2A /* Pucky.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Pucky.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5565C85BF629E34648E1356B /* TransformService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformService.swift; sourceTree = "<group>"; };
+		592345A91E7C9FA86935FC85 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		5947DDCDE2C42311D70438D6 /* ModelService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelService.swift; sourceTree = "<group>"; };
+		5A72E99FA56C224E931805AA /* Gemma4Runtime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gemma4Runtime.swift; sourceTree = "<group>"; };
+		5C580ADED23E9546C7F2F493 /* SyntaxHighlighter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyntaxHighlighter.swift; sourceTree = "<group>"; };
+		7181B4D881F434E69A47B227 /* DesignSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem.swift; sourceTree = "<group>"; };
+		729ED02647CC761F58A4ECC9 /* PreviewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewService.swift; sourceTree = "<group>"; };
+		7A2A541E6E988607F105046B /* LogEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogEntry.swift; sourceTree = "<group>"; };
+		7DF2D909489F952401236912 /* ProjectFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectFile.swift; sourceTree = "<group>"; };
+		8446E951E69CE785A1187BFB /* PuckyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuckyTests.swift; sourceTree = "<group>"; };
+		8515CCF291237C5BB7F538A8 /* PuckyUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = PuckyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D64DE0D3FABC852D0DC93C8 /* BuildError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildError.swift; sourceTree = "<group>"; };
+		91DB623653EE9A59F3CCCB97 /* IslandRope.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IslandRope.swift; sourceTree = "<group>"; };
+		9551B5D7D5C469B79655225E /* PuckyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuckyUITests.swift; sourceTree = "<group>"; };
+		961D304A5E5238893FFCB052 /* PuckyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuckyApp.swift; sourceTree = "<group>"; };
+		9738C647BFBAA72D3E3F0BCC /* OrchestrationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrchestrationService.swift; sourceTree = "<group>"; };
+		99A0F90F95D0D0803D924E15 /* ProjectScaffold.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectScaffold.swift; sourceTree = "<group>"; };
+		9DB66FB5B9842BD6212C1F93 /* Gemma4Tooling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gemma4Tooling.swift; sourceTree = "<group>"; };
+		9E6DCA11B30DD8D5814B29DF /* ChatScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatScreen.swift; sourceTree = "<group>"; };
+		A1F3A0892EABD5B51B3D8C40 /* PreviewScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewScreen.swift; sourceTree = "<group>"; };
+		A30AEA6CC626A46612B76434 /* ChatHistoryRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatHistoryRenderer.swift; sourceTree = "<group>"; };
+		B7CC4C101CD498381C63D6A0 /* three.module.min.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = three.module.min.js; sourceTree = "<group>"; };
+		C6D7388201FA32DA0E4E318B /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		CB8765AAC92101672099AF49 /* DynamicIsland.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicIsland.swift; sourceTree = "<group>"; };
+		D1E26ECEB83B94910F78DAC4 /* OxcBridge.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = OxcBridge.xcframework; path = "rust/oxc-bridge/OxcBridge.xcframework"; sourceTree = "<group>"; };
+		EB975850D4D74890ECE11425 /* PuckyTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = PuckyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F3E3A53E99DAB1A51716173F /* Gemma4Variant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gemma4Variant.swift; sourceTree = "<group>"; };
+		FD6A08746FE2AEC8FA2E25D8 /* ProjectService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectService.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CE014C116751185BBB48F373 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BAD2DE765FEBC7E9387EF9B0 /* OxcBridge.xcframework in Frameworks */,
+				1E4E4559BC77608739D82D1B /* Gemma4SwiftCore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0E316B8936AA7EA1BAF499CC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D1E26ECEB83B94910F78DAC4 /* OxcBridge.xcframework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		10F16F80E82D11BC56FF2711 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				592345A91E7C9FA86935FC85 /* AppState.swift */,
+				961D304A5E5238893FFCB052 /* PuckyApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		118740089B61D84DF1A9DDA1 /* Design */ = {
+			isa = PBXGroup;
+			children = (
+				7181B4D881F434E69A47B227 /* DesignSystem.swift */,
+				CB8765AAC92101672099AF49 /* DynamicIsland.swift */,
+				91DB623653EE9A59F3CCCB97 /* IslandRope.swift */,
+			);
+			path = Design;
+			sourceTree = "<group>";
+		};
+		1322B346DBCA1D05914E2F31 /* Code */ = {
+			isa = PBXGroup;
+			children = (
+				334B0DCE51BEED37B147E874 /* CodeScreen.swift */,
+			);
+			path = Code;
+			sourceTree = "<group>";
+		};
+		272D6DB242E954A1C54DF730 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				01E7DDC15870B97AA123C0DF /* MainNavigationView.swift */,
+				C6D7388201FA32DA0E4E318B /* OnboardingView.swift */,
+				6565E08AF626FFCB378FE6B2 /* Chat */,
+				1322B346DBCA1D05914E2F31 /* Code */,
+				FE9CAD755EE9E74D01EB473E /* Preview */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		295D02494C7714FCD7DC2F7C /* PuckyTests */ = {
+			isa = PBXGroup;
+			children = (
+				8446E951E69CE785A1187BFB /* PuckyTests.swift */,
+			);
+			path = PuckyTests;
+			sourceTree = "<group>";
+		};
+		2C9B90110B7DDC6260825A52 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8D64DE0D3FABC852D0DC93C8 /* BuildError.swift */,
+				A30AEA6CC626A46612B76434 /* ChatHistoryRenderer.swift */,
+				4322623B2AC49A8E058BD234 /* ChatMessage.swift */,
+				198CE24212B4108DFB39FFBD /* FilePatch.swift */,
+				7A2A541E6E988607F105046B /* LogEntry.swift */,
+				7DF2D909489F952401236912 /* ProjectFile.swift */,
+				99A0F90F95D0D0803D924E15 /* ProjectScaffold.swift */,
+				01626F0FCB7A7CB66D8762B7 /* ProjectTemplate.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		48828DE3ABC49202D539A35D = {
+			isa = PBXGroup;
+			children = (
+				D655E1280BA1F132CD24EB1B /* Pucky */,
+				295D02494C7714FCD7DC2F7C /* PuckyTests */,
+				C0DB3C5307112B502C579F61 /* PuckyUITests */,
+				0E316B8936AA7EA1BAF499CC /* Frameworks */,
+				CF2A80A49A76685FF26BA14E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6565E08AF626FFCB378FE6B2 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				0B8BECB3C55A67578831FA26 /* ChatBubble.swift */,
+				9E6DCA11B30DD8D5814B29DF /* ChatScreen.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		8065CA1542F632CD6B8851E2 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				10F16F80E82D11BC56FF2711 /* App */,
+				D4B42D9E1A26BE8F6C9E00A7 /* Components */,
+				118740089B61D84DF1A9DDA1 /* Design */,
+				2C9B90110B7DDC6260825A52 /* Models */,
+				272D6DB242E954A1C54DF730 /* Screens */,
+				C7950BAB3A6490F263D1383F /* Services */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		B87C04D411D901C3E5A4DE1D /* Runtime */ = {
+			isa = PBXGroup;
+			children = (
+				B7CC4C101CD498381C63D6A0 /* three.module.min.js */,
+			);
+			path = Runtime;
+			sourceTree = "<group>";
+		};
+		C0DB3C5307112B502C579F61 /* PuckyUITests */ = {
+			isa = PBXGroup;
+			children = (
+				9551B5D7D5C469B79655225E /* PuckyUITests.swift */,
+			);
+			path = PuckyUITests;
+			sourceTree = "<group>";
+		};
+		C7950BAB3A6490F263D1383F /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				5A72E99FA56C224E931805AA /* Gemma4Runtime.swift */,
+				9DB66FB5B9842BD6212C1F93 /* Gemma4Tooling.swift */,
+				F3E3A53E99DAB1A51716173F /* Gemma4Variant.swift */,
+				359B71FE1F8878E94AB7BC51 /* MemoryProbe.swift */,
+				5947DDCDE2C42311D70438D6 /* ModelService.swift */,
+				9738C647BFBAA72D3E3F0BCC /* OrchestrationService.swift */,
+				0356B8CC2C19D161C7B654A1 /* OxcBridge.swift */,
+				3240CA5A0FFE2B496C6ED3A1 /* PreviewRuntime.swift */,
+				729ED02647CC761F58A4ECC9 /* PreviewService.swift */,
+				FD6A08746FE2AEC8FA2E25D8 /* ProjectService.swift */,
+				2D2DA6FBC75F9E4918CF2346 /* PuckyLog.swift */,
+				5565C85BF629E34648E1356B /* TransformService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		CF2A80A49A76685FF26BA14E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4EC4BA2D292AB50D44BEDF2A /* Pucky.app */,
+				EB975850D4D74890ECE11425 /* PuckyTests.xctest */,
+				8515CCF291237C5BB7F538A8 /* PuckyUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D4B42D9E1A26BE8F6C9E00A7 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				5C580ADED23E9546C7F2F493 /* SyntaxHighlighter.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		D655E1280BA1F132CD24EB1B /* Pucky */ = {
+			isa = PBXGroup;
+			children = (
+				298F0E8DDBB68E1488CE30EC /* Assets.xcassets */,
+				B87C04D411D901C3E5A4DE1D /* Runtime */,
+				8065CA1542F632CD6B8851E2 /* Sources */,
+			);
+			path = Pucky;
+			sourceTree = "<group>";
+		};
+		FE9CAD755EE9E74D01EB473E /* Preview */ = {
+			isa = PBXGroup;
+			children = (
+				A1F3A0892EABD5B51B3D8C40 /* PreviewScreen.swift */,
+			);
+			path = Preview;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		20994EDCC57A7012FBFE8FB5 /* PuckyUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 03E03E47DCDF2586C80D93F2 /* Build configuration list for PBXNativeTarget "PuckyUITests" */;
+			buildPhases = (
+				8C44751157307245DBAB3498 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3FD73149E7A731B4784AA376 /* PBXTargetDependency */,
+			);
+			name = PuckyUITests;
+			packageProductDependencies = (
+			);
+			productName = PuckyUITests;
+			productReference = 8515CCF291237C5BB7F538A8 /* PuckyUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		B904DDBDF0DACF3D5BCBBE13 /* PuckyTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DEB25CB0C992EBB4C30ADBE0 /* Build configuration list for PBXNativeTarget "PuckyTests" */;
+			buildPhases = (
+				12E6C27B8258ED65D9A50B09 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				078852420E68DF3810C9CAB4 /* PBXTargetDependency */,
+			);
+			name = PuckyTests;
+			packageProductDependencies = (
+			);
+			productName = PuckyTests;
+			productReference = EB975850D4D74890ECE11425 /* PuckyTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		D318CD790689751E2F53FE86 /* Pucky */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 07CBF1D9FB35791C852C388D /* Build configuration list for PBXNativeTarget "Pucky" */;
+			buildPhases = (
+				F98E33AB4276208FE952B399 /* Sources */,
+				BEF05CDC9EBAF3EEA29E4764 /* Resources */,
+				CE014C116751185BBB48F373 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Pucky;
+			packageProductDependencies = (
+				8DB7F35B376C104526FE54AF /* Gemma4SwiftCore */,
+			);
+			productName = Pucky;
+			productReference = 4EC4BA2D292AB50D44BEDF2A /* Pucky.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		168DEE1070BC1E00BE8A541E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 2640;
+				TargetAttributes = {
+					20994EDCC57A7012FBFE8FB5 = {
+						TestTargetID = D318CD790689751E2F53FE86;
+					};
+					D318CD790689751E2F53FE86 = {
+						DevelopmentTeam = FHAMPJRKAY;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 3E16C8608A9FAD4E35CF4568 /* Build configuration list for PBXProject "Pucky" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 48828DE3ABC49202D539A35D;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				D859B5D5117C8D321AADB7BB /* XCRemoteSwiftPackageReference "Swift-gemma4-core" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = CF2A80A49A76685FF26BA14E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D318CD790689751E2F53FE86 /* Pucky */,
+				B904DDBDF0DACF3D5BCBBE13 /* PuckyTests */,
+				20994EDCC57A7012FBFE8FB5 /* PuckyUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BEF05CDC9EBAF3EEA29E4764 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4CF37E64D543946E40A52564 /* Assets.xcassets in Resources */,
+				A883D473017A917297D87FF5 /* three.module.min.js in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		12E6C27B8258ED65D9A50B09 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D26666C4D5D687B78F9DDCF /* PuckyTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8C44751157307245DBAB3498 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5FCF136EE00AD6D7EC00FBA8 /* PuckyUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F98E33AB4276208FE952B399 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				775F2D223B9FCFF314910DCE /* AppState.swift in Sources */,
+				B2782AB2ADF30B3AFDDEC466 /* BuildError.swift in Sources */,
+				7D320469D6CD00C5EFBAC4AF /* ChatBubble.swift in Sources */,
+				DEC55F9E7F890B1065A5E34E /* ChatHistoryRenderer.swift in Sources */,
+				71D850AA51312F5BF53D88C2 /* ChatMessage.swift in Sources */,
+				A9FC1664AA174F3B9EE74C52 /* ChatScreen.swift in Sources */,
+				1E5D62688B9168CBFF37301D /* CodeScreen.swift in Sources */,
+				01C4D894A2C7EF66A9AE7172 /* DesignSystem.swift in Sources */,
+				E2FB02D9BCD0A33C8C024D72 /* DynamicIsland.swift in Sources */,
+				276EC74B66183E4845365F2B /* FilePatch.swift in Sources */,
+				B02891DA16EB82586F8B69A3 /* Gemma4Runtime.swift in Sources */,
+				F1CD237CF97FC36460C61832 /* Gemma4Tooling.swift in Sources */,
+				479812B2E39948CCC8B73EA4 /* Gemma4Variant.swift in Sources */,
+				858D42170819D17AED44B7D5 /* IslandRope.swift in Sources */,
+				5DD20BCCD2270E18B8779F98 /* LogEntry.swift in Sources */,
+				4006CEB5DA928892DD839245 /* MainNavigationView.swift in Sources */,
+				E63806EDB65AF56452ADDAF8 /* MemoryProbe.swift in Sources */,
+				D7A0929344276F1D823915B6 /* ModelService.swift in Sources */,
+				88D18430D12C7EECD301A656 /* OnboardingView.swift in Sources */,
+				8927BF66F273BC914F9CA527 /* OrchestrationService.swift in Sources */,
+				01199D2D1C3364613823CD88 /* OxcBridge.swift in Sources */,
+				1EC1C231B510FB35886D9D40 /* PreviewRuntime.swift in Sources */,
+				C58E3C1AFD4AF491974AD808 /* PreviewScreen.swift in Sources */,
+				01C3900673872BCBF895AFD3 /* PreviewService.swift in Sources */,
+				C8D45104F68F48A30EFB9B37 /* ProjectFile.swift in Sources */,
+				8D64DB92E48CC53250301BE9 /* ProjectScaffold.swift in Sources */,
+				042D870FA87BE2A736F8B25A /* ProjectService.swift in Sources */,
+				671318D456885EEFCC6C3E3B /* ProjectTemplate.swift in Sources */,
+				FAB35FE072FE4F3F2C214643 /* PuckyApp.swift in Sources */,
+				32A0E8D7A097275F7168A521 /* PuckyLog.swift in Sources */,
+				15BA5A4DF95344BFAEB1CC4B /* SyntaxHighlighter.swift in Sources */,
+				F1B4FB18A3C23FC590FE5095 /* TransformService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		078852420E68DF3810C9CAB4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D318CD790689751E2F53FE86 /* Pucky */;
+			targetProxy = F5CCEA9A18980522268C07E2 /* PBXContainerItemProxy */;
+		};
+		3FD73149E7A731B4784AA376 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D318CD790689751E2F53FE86 /* Pucky */;
+			targetProxy = 48C1BCD54AF655329AAEE7F3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		02F4D13B76A24F2E11EEF14B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.blixt.pucky.tests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Pucky.app/Pucky";
+			};
+			name = Debug;
+		};
+		21796496C3FF81946DB2EFB2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.2;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		2FAC729C55EA89BAF53395AE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Pucky/Pucky.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = FHAMPJRKAY;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"rust/oxc-bridge\"",
+				);
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Pucky;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.blixt.pucky;
+				PRODUCT_NAME = Pucky;
+				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "Pucky/Sources/Bridging/Pucky-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		56C016712337AA3DE0729F3D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.blixt.pucky.uitests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Pucky;
+			};
+			name = Release;
+		};
+		5F96974B36802A3F9DF45676 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.blixt.pucky.uitests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Pucky;
+			};
+			name = Debug;
+		};
+		67C60CDFCD5231187865BD55 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 6.2;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		8C9CDC6261BA7B676F8813E9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Pucky/Pucky.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = FHAMPJRKAY;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"rust/oxc-bridge\"",
+				);
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Pucky;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.blixt.pucky;
+				PRODUCT_NAME = Pucky;
+				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "Pucky/Sources/Bridging/Pucky-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		8EB4380B92B57CF6885A766C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.blixt.pucky.tests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Pucky.app/Pucky";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		03E03E47DCDF2586C80D93F2 /* Build configuration list for PBXNativeTarget "PuckyUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5F96974B36802A3F9DF45676 /* Debug */,
+				56C016712337AA3DE0729F3D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		07CBF1D9FB35791C852C388D /* Build configuration list for PBXNativeTarget "Pucky" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2FAC729C55EA89BAF53395AE /* Debug */,
+				8C9CDC6261BA7B676F8813E9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		3E16C8608A9FAD4E35CF4568 /* Build configuration list for PBXProject "Pucky" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				21796496C3FF81946DB2EFB2 /* Debug */,
+				67C60CDFCD5231187865BD55 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		DEB25CB0C992EBB4C30ADBE0 /* Build configuration list for PBXNativeTarget "PuckyTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				02F4D13B76A24F2E11EEF14B /* Debug */,
+				8EB4380B92B57CF6885A766C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D859B5D5117C8D321AADB7BB /* XCRemoteSwiftPackageReference "Swift-gemma4-core" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/yejingyang8963-byte/Swift-gemma4-core";
+			requirement = {
+				kind = revision;
+				revision = a98eff8077372f9664454b879084b7c75dc756e3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8DB7F35B376C104526FE54AF /* Gemma4SwiftCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D859B5D5117C8D321AADB7BB /* XCRemoteSwiftPackageReference "Swift-gemma4-core" */;
+			productName = Gemma4SwiftCore;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 168DEE1070BC1E00BE8A541E /* Project object */;
+}

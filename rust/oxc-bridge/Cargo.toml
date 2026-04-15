@@ -1,0 +1,19 @@
+[package]
+name = "oxc-bridge"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "oxc_bridge"
+crate-type = ["staticlib"]
+
+[dependencies]
+oxc = { version = "0.124", features = ["transformer", "codegen", "semantic"] }
+
+[build-dependencies]
+cbindgen = "0.28"
+
+[profile.release]
+lto = true
+opt-level = "s"
+strip = true
